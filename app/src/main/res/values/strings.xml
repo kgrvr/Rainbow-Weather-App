@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string-array name="pref_select_units">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+
+    <string-array name="pref_select_cnt">
+        <item>3</item>
+        <item>7</item>
+        <item>Maximum days possible</item>
+    </string-array>
+
+    <string-array name="pref_select_cnt_value">
+        <item>3</item>
+        <item>7</item>
+        <item>16</item>
+    </string-array>
+
+    <string-array name="pref_select_color">
+        <item>According to weather</item>
+        <item>Random</item>
+    </string-array>
+</resources>
