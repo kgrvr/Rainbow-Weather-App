@@ -20,12 +20,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
@@ -58,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView todayWeatherImageView;
     //View relativeBackground;
-    TextView todayDateTextView, todayCurrentWeatherTextView, todayCurrentHumidity, todayCurrentWindSpeed, todayIn, todayCurrentPressure, todayCurrentWindDeg, CorF;
+    TextView todayDateTextView, todayCurrentWeatherTextView, todayCurrentHumidity, todayCurrentWindSpeed, todayCurrentPressure, todayCurrentWindDeg, CorF;
+    EditText todayIn;
     RelativeLayout todayLinearLayout;
     CollapsingToolbarLayout collapsingToolbar;
     Toolbar toolbar;
@@ -140,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         todayCurrentWeatherTextView = (TextView) findViewById(R.id.today_current_weather_textview);
         todayCurrentHumidity = (TextView) findViewById(R.id.today_current_humidity_weather_textview);
         todayCurrentWindSpeed = (TextView) findViewById(R.id.today_current_wind_speed_weather_textview);
-        todayIn = (TextView) findViewById(R.id.today_in_textview);
+        todayIn = (EditText) findViewById(R.id.today_in_textview);
         todayCurrentPressure = (TextView) findViewById(R.id.today_current_pressure_weather_textview);
         todayCurrentWindDeg = (TextView) findViewById(R.id.today_current_wind_deg_weather_textview);
         CorF = (TextView) super.findViewById(R.id.CorF);
@@ -156,6 +162,45 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        todayIn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                todayIn.setClickable(true);
+                todayIn.setFocusableInTouchMode(true);
+                todayIn.requestFocus();
+                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(todayIn, InputMethodManager.SHOW_IMPLICIT);
+                todayIn.setImeOptions(EditorInfo.IME_ACTION_GO);
+                return true;
+            }
+        });
+
+        todayIn.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_MASK_ACTION ||
+                        actionId == EditorInfo.IME_ACTION_DONE ||
+                        event.getAction() == KeyEvent.ACTION_DOWN &&
+                                event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    if(TextUtils.isEmpty(todayIn.getText()))
+                        Toast.makeText(MainActivity.this, "Enter correct loaction.", Toast.LENGTH_SHORT).show();
+                    else {
+                        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        todayIn.clearFocus();
+                        todayIn.setClickable(false);
+                        todayIn.setFocusableInTouchMode(false);
+                        todayIn.setFocusable(false);
+                        setSharedPreferencesValue("location", todayIn.getText().toString());
+                    }
+                    updateForecast();
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         updateForecast();
 
@@ -216,6 +261,26 @@ public class MainActivity extends AppCompatActivity {
     public void menuButton(View view) {
         Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intentSettings);
+    }
+
+    public void toastOnClickView(View v) {
+        switch (v.getId()) {
+            case R.id.today_current_humidity_weather_textview:
+                Toast.makeText(MainActivity.this, "Humidity: " + todayCurrentHumidity.getText() + "%", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.today_current_wind_speed_weather_textview:
+                Toast.makeText(MainActivity.this, "Wind Speed: " + todayCurrentWindSpeed.getText() + " Meter(s)/Second", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.today_current_pressure_weather_textview:
+                Toast.makeText(MainActivity.this, "Pressure: " + todayCurrentPressure.getText() + " Hectopascal", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.today_current_wind_deg_weather_textview:
+                Toast.makeText(MainActivity.this, "Wind Direction: " + todayCurrentWindDeg.getText(), Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     private String[] updateForecast() {

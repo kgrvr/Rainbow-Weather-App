@@ -54,13 +54,19 @@
                             android:layout_marginBottom="80dp"
                             android:gravity="center">
 
-                            <TextView
+                            <EditText
                                 android:id="@+id/today_in_textview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="Loading"
                                 android:textAlignment="center"
+                                android:background="@android:color/transparent"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:maxLines="1"
+                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/abc_primary_text_material_dark"
                                 android:textSize="28sp" />
 
@@ -191,6 +197,7 @@
                                         android:layout_toRightOf="@id/humidity_icon"
                                         android:gravity="center"
                                         android:text="00"
+                                        android:onClick="toastOnClickView"
                                         android:textColor="@color/abc_primary_text_material_dark"
                                         android:textSize="18sp" />
 
@@ -202,7 +209,6 @@
                                         android:layout_toRightOf="@id/today_current_humidity_weather_textview"
                                         android:gravity="center"
                                         android:text="%"
-                                        android:textColor="@color/abc_primary_text_material_dark"
                                         android:textSize="18sp" />
 
                                     <ImageView
@@ -221,6 +227,7 @@
                                         android:layout_marginLeft="10dp"
                                         android:layout_toRightOf="@id/wind_speed_icon"
                                         android:text="00"
+                                        android:onClick="toastOnClickView"
                                         android:textColor="@color/abc_primary_text_material_dark"
                                         android:textSize="18sp" />
 
@@ -230,15 +237,34 @@
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@id/today_current_wind_speed_weather_textview"
                                         android:text="m/s"
-                                        android:textSize="18sp"
-                                        android:textColor="@color/abc_primary_text_material_dark" />
+                                        android:textSize="18sp" />
+
+                                    <ImageView
+                                        android:id="@+id/compass_icon"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_gravity="center"
+                                        android:layout_toRightOf="@id/mps"
+                                        android:layout_marginLeft="10dp"
+                                        android:src="@drawable/compass_icon" />
+
+                                    <TextView
+                                        android:id="@+id/today_current_wind_deg_weather_textview"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toRightOf="@id/compass_icon"
+                                        android:text="N"
+                                        android:onClick="toastOnClickView"
+                                        android:textColor="@color/abc_primary_text_material_dark"
+                                        android:textSize="18sp" />
 
                                     <ImageView
                                         android:id="@+id/pressure_icon"
                                         android:layout_width="18dp"
                                         android:layout_height="18dp"
                                         android:layout_gravity="center"
-                                        android:layout_toRightOf="@id/mps"
+                                        android:layout_toRightOf="@id/today_current_wind_deg_weather_textview"
                                         android:layout_marginLeft="10dp"
                                         android:src="@drawable/pressure_icon" />
 
@@ -247,6 +273,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/pressure_icon"
                                         android:text="00"
                                         android:textColor="@color/abc_primary_text_material_dark"
@@ -258,26 +285,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@id/today_current_pressure_weather_textview"
                                         android:text="hPa"
-                                        android:textColor="@color/abc_primary_text_material_dark"
-                                        android:textSize="18sp" />
-
-                                    <ImageView
-                                        android:id="@+id/compass_icon"
-                                        android:layout_width="18dp"
-                                        android:layout_height="18dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_toRightOf="@id/hPa"
-                                        android:src="@drawable/compass_icon" />
-
-                                    <TextView
-                                        android:id="@+id/today_current_wind_deg_weather_textview"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_toRightOf="@id/compass_icon"
-                                        android:text="N"
-                                        android:textColor="@color/abc_primary_text_material_dark"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </RelativeLayout>
