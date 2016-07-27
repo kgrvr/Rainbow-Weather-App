@@ -87,7 +87,7 @@ public class JSONParsing {
     private String getReadableDateString(long time){
         // Because the API returns a unix timestamp (measured in seconds),
         // it must be converted to milliseconds in order to be converted to valid date.
-        SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
+        SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEEE MMM dd");
         return shortenedDateFormat.format(time);
     }
 
