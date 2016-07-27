@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7968df0a-31ff-4ff4-a31a-49dd6818b06f" name="Default" comment="">
+    <list default="true" id="7968df0a-31ff-4ff4-a31a-49dd6818b06f" name="Default" comment="todayCurrentWeatherTextView long click listner added - blank&#10;new method added - setSharedPreferencesValue">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/itskush/kushal/sunshine/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/itskush/kushal/sunshine/MainActivity.java" />
     </list>
@@ -33,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/itskush/kushal/sunshine/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.608229">
-              <caret line="242" column="51" selection-start-line="242" selection-start-column="51" selection-end-line="242" selection-end-column="51" />
+              <caret line="242" column="50" selection-start-line="242" selection-start-column="50" selection-end-line="242" selection-end-column="50" />
               <folding>
                 <element signature="e#6588#6745#0" expanded="true" />
                 <element signature="e#6744#6745#0" expanded="true" />
@@ -1982,7 +1982,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469599986351</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="todayCurrentWeatherTextView long click listner added - blank&#10;new method added - setSharedPreferencesValue">
+      <created>1469600980765</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1469600980765</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2054,7 +2060,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Date format changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Date format changed" />
+    <MESSAGE value="todayCurrentWeatherTextView long click listner added - blank&#10;new method added - setSharedPreferencesValue" />
+    <option name="LAST_COMMIT_MESSAGE" value="todayCurrentWeatherTextView long click listner added - blank&#10;new method added - setSharedPreferencesValue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2104,7 +2111,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/itskush/kushal/sunshine/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.608229">
-          <caret line="242" column="51" selection-start-line="242" selection-start-column="51" selection-end-line="242" selection-end-column="51" />
+          <caret line="242" column="50" selection-start-line="242" selection-start-column="50" selection-end-line="242" selection-end-column="50" />
           <folding>
             <element signature="e#6588#6745#0" expanded="true" />
             <element signature="e#6744#6745#0" expanded="true" />

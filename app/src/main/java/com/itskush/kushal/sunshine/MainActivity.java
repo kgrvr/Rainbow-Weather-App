@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setSharedPreferencesValue(String key, String value) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        pref.edit().putString(key, value).commit();
+        pref.edit().putString(key, value).apply();
     }
 
     private void openPreferredLocationInMap(String cityName) {
