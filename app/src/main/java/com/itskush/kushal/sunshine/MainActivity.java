@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView todayWeatherImageView;
     //View relativeBackground;
-    TextView todayDateTextView, todayCurrentWeatherTextView, todaysWeatherTV, todayCurrentHumidity, todayCurrentWindSpeed, todayIn, todayCurrentPressure, todayCurrentWindDeg;
+    TextView todayDateTextView, todayCurrentWeatherTextView, todayCurrentHumidity, todayCurrentWindSpeed, todayIn, todayCurrentPressure, todayCurrentWindDeg;
     RelativeLayout todayLinearLayout;
     CollapsingToolbarLayout collapsingToolbar;
     Toolbar toolbar;
@@ -191,11 +191,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void optionButton(View view) {
-//        MainActivity.this.openOptionsMenu();;
-        toolbar.showOverflowMenu();
     }
 
     public void refreshButton(View view) {
@@ -435,8 +430,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 recyclerView.setAdapter(recyclerViewAdapter);
 
-                // for today's linear layout
-                String today = result[0];
 
                 todayDateTextView.setText(jsonParsing.getCurrentMain());
                 todayCurrentWeatherTextView.setText(Long.toString(jsonParsing.getCurrentTemp()) + "°");
@@ -451,46 +444,74 @@ public class MainActivity extends AppCompatActivity {
                 String currentMain = jsonParsing.getCurrentMain();
                 if(currentMain != null) {
                     if(getSharedPreferencesValue("color", "random").charAt(0) == 'A') {
-                        if (currentMain.equals("Rain")) {
-                            todayWeatherImageView.setImageResource(R.drawable.rain_icon);
-                            changeWeatherViewColor("#3F51B5", "#3F51B5", "#303F9F");  //indigo
+                        switch (currentMain) {
+                            case "Rain":
+                                todayWeatherImageView.setImageResource(R.drawable.rain_icon);
+                                changeWeatherViewColor("#3F51B5", "#3F51B5", "#303F9F");  //indigo
 //                    relativeBackground.setImageResource(R.drawable.rain);
-                        } else if (currentMain.equals("Mist")|| currentMain.equals("Haze")) {
-                            todayWeatherImageView.setImageResource(R.drawable.fog_icon);
-                            changeWeatherViewColor("#9E9E9E", "#9E9E9E", "#616161");  //grey
+                                break;
+                            case "Mist":
+                            case "Haze":
+                                todayWeatherImageView.setImageResource(R.drawable.fog_icon);
+                                changeWeatherViewColor("#9E9E9E", "#9E9E9E", "#616161");  //grey
+
 //                    relativeBackground.setImageResource(R.drawable.mist);
-                        } else if (currentMain.equals("Clouds")) {
-                            todayWeatherImageView.setImageResource(R.drawable.clouds_icon);
-                            changeWeatherViewColor("#455A64", "#455A64", "#263238");  //blue grey
-                        } else if (currentMain.equals("Sunny") || currentMain.equals("Clear")) {
-                            todayWeatherImageView.setImageResource(R.drawable.sun_icon);
-                            changeWeatherViewColor("#FFC107", "#FFC107", "#FFA000");  //Amber
-                        } else if (currentMain.equals("Night")) {
-                            todayWeatherImageView.setImageResource(R.drawable.moon_icon);
-                            changeWeatherViewColor("#616161", "#616161", "#212121");  //Grey
-                        } else if (currentMain.equals("Storm") || currentMain.equals("Thunderstorm")) {
-                            todayWeatherImageView.setImageResource(R.drawable.storm_icon);
-                            changeWeatherViewColor("#9E9E9E", "#9E9E9E", "#616161");  //Grey
-                        } else {
-                            todayWeatherImageView.setImageResource(R.mipmap.ic_launcher);
-                            changeWeatherViewColor("#3F51B5", "#3F51B5", "#303F9F");  //default
+                                break;
+                            case "Clouds":
+                                todayWeatherImageView.setImageResource(R.drawable.clouds_icon);
+                                changeWeatherViewColor("#455A64", "#455A64", "#263238");  //blue grey
+
+                                break;
+                            case "Sunny":
+                            case "Clear":
+                                todayWeatherImageView.setImageResource(R.drawable.sun_icon);
+                                changeWeatherViewColor("#FFC107", "#FFC107", "#FFA000");  //Amber
+
+                                break;
+                            case "Night":
+                                todayWeatherImageView.setImageResource(R.drawable.moon_icon);
+                                changeWeatherViewColor("#616161", "#616161", "#212121");  //Grey
+
+                                break;
+                            case "Storm":
+                            case "Thunderstorm":
+                                todayWeatherImageView.setImageResource(R.drawable.storm_icon);
+                                changeWeatherViewColor("#9E9E9E", "#9E9E9E", "#616161");  //Grey
+
+                                break;
+                            default:
+                                todayWeatherImageView.setImageResource(R.mipmap.ic_launcher);
+                                changeWeatherViewColor("#3F51B5", "#3F51B5", "#303F9F");  //default
+
+                                break;
                         }
                     }
                     else {
-                        if (currentMain.equals("Rain")) {
-                            todayWeatherImageView.setImageResource(R.drawable.rain_icon);
-                        } else if (currentMain.equals("Mist") || currentMain.equals("Haze")) {
-                            todayWeatherImageView.setImageResource(R.drawable.fog_icon);
-                        } else if (currentMain.equals("Clouds")) {
-                            todayWeatherImageView.setImageResource(R.drawable.clouds_icon);
-                        } else if (currentMain.equals("Sunny" )|| currentMain.equals("Clear")) {
-                            todayWeatherImageView.setImageResource(R.drawable.sun_icon);
-                        } else if (currentMain.equals("Night")) {
-                            todayWeatherImageView.setImageResource(R.drawable.moon_icon);
-                        } else if (currentMain.equals("Storm") || currentMain.equals("Thunderstorm")) {
-                            todayWeatherImageView.setImageResource(R.drawable.storm_icon);
-                        } else {
-                            todayWeatherImageView.setImageResource(R.mipmap.ic_launcher);
+                        switch (currentMain) {
+                            case "Rain":
+                                todayWeatherImageView.setImageResource(R.drawable.rain_icon);
+                                break;
+                            case "Mist":
+                            case "Haze":
+                                todayWeatherImageView.setImageResource(R.drawable.fog_icon);
+                                break;
+                            case "Clouds":
+                                todayWeatherImageView.setImageResource(R.drawable.clouds_icon);
+                                break;
+                            case "Sunny":
+                            case "Clear":
+                                todayWeatherImageView.setImageResource(R.drawable.sun_icon);
+                                break;
+                            case "Night":
+                                todayWeatherImageView.setImageResource(R.drawable.moon_icon);
+                                break;
+                            case "Storm":
+                            case "Thunderstorm":
+                                todayWeatherImageView.setImageResource(R.drawable.storm_icon);
+                                break;
+                            default:
+                                todayWeatherImageView.setImageResource(R.mipmap.ic_launcher);
+                                break;
                         }
                         changeRandomViewColor();
                     }
