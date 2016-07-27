@@ -18,7 +18,7 @@
         android:entryValues="@array/pref_select_units"/>
 
     <ListPreference
-        android:title="Number of days"
+        android:title="Number of days of forecast"
         android:key="cnt"
         android:defaultValue="7"
         android:entries="@array/pref_select_cnt"
@@ -30,5 +30,12 @@
         android:defaultValue="random"
         android:entries="@array/pref_select_color"
         android:entryValues="@array/pref_select_color"/>
+
+    <ListPreference
+        android:title="Font face"
+        android:key="typeface"
+        android:defaultValue="normal"
+        android:entries="@array/pref_select_typeface"
+        android:entryValues="@array/pref_select_typeface"/>
 
 </PreferenceScreen>

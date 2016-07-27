@@ -27,4 +27,11 @@
         <item>According to weather</item>
         <item>Random</item>
     </string-array>
+
+    <string-array name="pref_select_typeface">
+        <item>Monospace</item>
+        <item>Normal</item>
+        <item>Sans</item>
+        <item>Serif</item>
+    </string-array>
 </resources>

@@ -1,4 +1,4 @@
-﻿package com.itskush.kushal.sunshine;
+package com.itskush.kushal.sunshine;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView todayWeatherImageView;
     //View relativeBackground;
-    TextView todayDateTextView, todayCurrentWeatherTextView, todayCurrentHumidity, todayCurrentWindSpeed, todayIn, todayCurrentPressure, todayCurrentWindDeg;
+    TextView todayDateTextView, todayCurrentWeatherTextView, todayCurrentHumidity, todayCurrentWindSpeed, todayIn, todayCurrentPressure, todayCurrentWindDeg, CorF;
     RelativeLayout todayLinearLayout;
     CollapsingToolbarLayout collapsingToolbar;
     Toolbar toolbar;
@@ -142,11 +143,17 @@ public class MainActivity extends AppCompatActivity {
         todayIn = (TextView) findViewById(R.id.today_in_textview);
         todayCurrentPressure = (TextView) findViewById(R.id.today_current_pressure_weather_textview);
         todayCurrentWindDeg = (TextView) findViewById(R.id.today_current_wind_deg_weather_textview);
+        CorF = (TextView) super.findViewById(R.id.CorF);
 
         todayCurrentWeatherTextView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;
+                if (getSharedPreferencesValue("units", "C").charAt(0) == 'C')
+                    setSharedPreferencesValue("units","Fahrenheit");
+                else
+                    setSharedPreferencesValue("units","Celsius");
+                updateForecast();
+                return true;
             }
         });
 
@@ -225,6 +232,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("normal"))
+            changeTypeFace(Typeface.DEFAULT);
+        else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("monospace"))
+            changeTypeFace(Typeface.MONOSPACE);
+        else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("sans"))
+            changeTypeFace(Typeface.SANS_SERIF);
+        else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("serif"))
+            changeTypeFace(Typeface.SERIF);
+        else
+            changeTypeFace(Typeface.DEFAULT);
         updateForecast();
     }
 
@@ -238,20 +255,20 @@ public class MainActivity extends AppCompatActivity {
         pref.edit().putString(key, value).apply();
     }
 
-    private void openPreferredLocationInMap(String cityName) {
-        Uri geoLocation = Uri.parse("geo:" + jsonParsing.getCityLongitude() + "," + jsonParsing.getCityLatitude() + "?z=11").buildUpon()
-                .appendQueryParameter("q", jsonParsing.getCityName())
-                .build();
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geoLocation);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Toast.makeText(MainActivity.this, "Couldn't call " + cityName + ", no receiving apps installed!", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void openPreferredLocationInMap(String cityName) {
+//        Uri geoLocation = Uri.parse("geo:" + jsonParsing.getCityLongitude() + "," + jsonParsing.getCityLatitude() + "?z=11").buildUpon()
+//                .appendQueryParameter("q", jsonParsing.getCityName())
+//                .build();
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(geoLocation);
+//
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        } else {
+//            Toast.makeText(MainActivity.this, "Couldn't call " + cityName + ", no receiving apps installed!", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     private void initCollapsingToolbar() {
         collapsingToolbar =
@@ -289,12 +306,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void changeTypeFace(Typeface typeface) {
+        todayIn.setTypeface(typeface);
+        todayDateTextView.setTypeface(typeface);
+        todayCurrentWeatherTextView.setTypeface(typeface);
+        todayCurrentHumidity.setTypeface(typeface);
+        todayCurrentWindSpeed.setTypeface(typeface);
+        todayCurrentPressure.setTypeface(typeface);
+        todayCurrentWindDeg.setTypeface(typeface);
+        CorF.setTypeface(typeface);
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
     public class DownloadDataTask extends AsyncTask<String, Void, String[]> {
 
 
-        private static final String apiId = "Your_API_Key";
+        private static final String apiId = "df74175c8f9e6ab3ecdab6981a2ae49c";
         private String downloadedCurrentData, downloadedForecastData;
 
         //link to weather of Faridabad using api key:
@@ -315,9 +343,7 @@ public class MainActivity extends AppCompatActivity {
                 jsonParsing.getCurrentWeatherDataFromJson(downloadedCurrentData);
 
                 downloadedForecastData = downloadData(buildURI(cityID[0], "json", format, getSharedPreferencesValue("cnt", "7"), false));
-                String[] data = jsonParsing.getWeatherDataFromJson(downloadedForecastData,
-                        Integer.parseInt(getSharedPreferencesValue("cnt", "7")));
-                return data;
+                return jsonParsing.getWeatherDataFromJson(downloadedForecastData, Integer.parseInt(getSharedPreferencesValue("cnt", "7")));
             } catch (Exception e) {
                 //return "Unable to retrieve data.";
                 return null;
@@ -330,9 +356,6 @@ public class MainActivity extends AppCompatActivity {
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
-
-            // Will contain the raw JSON response as a string.
-            String forecastJsonStr = null;
 
             try {
                 // Construct the URL for the OpenWeatherMap query
@@ -368,8 +391,7 @@ public class MainActivity extends AppCompatActivity {
                     // Stream was empty.  No point in parsing.
                     return null;
                 }
-                forecastJsonStr = buffer.toString();
-                return forecastJsonStr;
+                return buffer.toString();
             } catch (IOException e) {
                 // If the code didn't successfully get the weather data, there's no point in attemping
                 // to parse it.
@@ -432,11 +454,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                 todayDateTextView.setText(jsonParsing.getCurrentMain());
-                todayCurrentWeatherTextView.setText(Long.toString(jsonParsing.getCurrentTemp()) + "°");
+                todayCurrentWeatherTextView.setText(Long.toString(jsonParsing.getCurrentTemp()));
                 todayCurrentHumidity.setText(Long.toString(jsonParsing.getCurrentHumidity()));
                 todayCurrentWindSpeed.setText(Long.toString(jsonParsing.getCurrentWindSpeed()));
                 todayCurrentPressure.setText(Long.toString(jsonParsing.getCurrentPressure()));
                 todayCurrentWindDeg.setText(jsonParsing.getCurrentWindDeg());
+                CorF.setText(getSharedPreferencesValue("units", "C"));
 
                 //MainActivity.this.setTitle("Today in " + jsonParsing.getCityName());
                 todayIn.setText(jsonParsing.getCityName());

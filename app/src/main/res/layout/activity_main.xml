@@ -51,7 +51,7 @@
                         <TableRow
                             android:id="@+id/tableRow1"
                             android:layout_gravity="center"
-                            android:layout_marginBottom="70dp"
+                            android:layout_marginBottom="80dp"
                             android:gravity="center">
 
                             <TextView
@@ -102,7 +102,7 @@
                         <TableRow
                             android:id="@+id/tableRow4"
                             android:layout_gravity="center"
-                            android:layout_marginBottom="30dp"
+                            android:layout_marginBottom="80dp"
                             android:gravity="center">
 
                             <RelativeLayout
@@ -132,6 +132,26 @@
                                     android:text="00"
                                     android:textColor="@color/abc_primary_text_material_dark"
                                     android:textSize="100sp" />
+
+                                <TextView
+                                    android:id="@+id/degree"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="70dp"
+                                    android:text="°"
+                                    android:textColor="@color/abc_primary_text_material_dark"
+                                    android:layout_toEndOf="@id/today_current_weather_textview"
+                                    android:textSize="100sp"/>
+
+                                <TextView
+                                    android:id="@+id/CorF"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="C"
+                                    android:layout_toEndOf="@id/today_current_weather_textview"
+                                    android:layout_below="@id/degree"
+                                    android:layout_marginLeft="10dp"
+                                    android:maxLength="1"
+                                    android:textSize="25sp"/>
                             </RelativeLayout>
 
                         </TableRow>
@@ -156,8 +176,8 @@
 
                                     <ImageView
                                         android:id="@+id/humidity_icon"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
                                         android:layout_gravity="center"
                                         android:gravity="center"
                                         android:src="@drawable/humidity_icon" />
@@ -172,7 +192,7 @@
                                         android:gravity="center"
                                         android:text="00"
                                         android:textColor="@color/abc_primary_text_material_dark"
-                                        android:textSize="22sp" />
+                                        android:textSize="18sp" />
 
                                     <TextView
                                         android:id="@+id/percentage"
@@ -187,10 +207,10 @@
 
                                     <ImageView
                                         android:id="@+id/wind_speed_icon"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
                                         android:layout_gravity="center"
-                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginLeft="10dp"
                                         android:layout_toRightOf="@id/percentage"
                                         android:src="@drawable/wind_speed_icon" />
 
@@ -202,7 +222,7 @@
                                         android:layout_toRightOf="@id/wind_speed_icon"
                                         android:text="00"
                                         android:textColor="@color/abc_primary_text_material_dark"
-                                        android:textSize="22sp" />
+                                        android:textSize="18sp" />
 
                                     <TextView
                                         android:id="@+id/mps"
@@ -210,26 +230,16 @@
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@id/today_current_wind_speed_weather_textview"
                                         android:text="m/s"
+                                        android:textSize="18sp"
                                         android:textColor="@color/abc_primary_text_material_dark" />
-
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:id="@+id/detail_lower_RL"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/detail_upper_RL"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_gravity="center"
-                                    android:layout_marginBottom="10dp"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center">
 
                                     <ImageView
                                         android:id="@+id/pressure_icon"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
                                         android:layout_gravity="center"
+                                        android:layout_toRightOf="@id/mps"
+                                        android:layout_marginLeft="10dp"
                                         android:src="@drawable/pressure_icon" />
 
                                     <TextView
@@ -240,7 +250,7 @@
                                         android:layout_toRightOf="@id/pressure_icon"
                                         android:text="00"
                                         android:textColor="@color/abc_primary_text_material_dark"
-                                        android:textSize="22sp" />
+                                        android:textSize="18sp" />
 
                                     <TextView
                                         android:id="@+id/hPa"
@@ -253,10 +263,10 @@
 
                                     <ImageView
                                         android:id="@+id/compass_icon"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
                                         android:layout_gravity="center"
-                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginLeft="10dp"
                                         android:layout_toRightOf="@id/hPa"
                                         android:src="@drawable/compass_icon" />
 
@@ -268,7 +278,7 @@
                                         android:layout_toRightOf="@id/compass_icon"
                                         android:text="N"
                                         android:textColor="@color/abc_primary_text_material_dark"
-                                        android:textSize="22sp" />
+                                        android:textSize="18sp" />
                                 </RelativeLayout>
                             </RelativeLayout>
 

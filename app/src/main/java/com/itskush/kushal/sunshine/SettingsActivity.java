@@ -30,6 +30,7 @@ public class SettingsActivity extends PreferenceActivity
         this.bindPreferenceSummaryToValue(super.findPreference("units"));
         this.bindPreferenceSummaryToValue(super.findPreference("cnt"));
         this.bindPreferenceSummaryToValue(super.findPreference("color"));
+        this.bindPreferenceSummaryToValue(super.findPreference("typeface"));
 
     }
 
