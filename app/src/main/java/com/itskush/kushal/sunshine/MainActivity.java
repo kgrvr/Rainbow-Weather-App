@@ -143,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
         todayCurrentPressure = (TextView) findViewById(R.id.today_current_pressure_weather_textview);
         todayCurrentWindDeg = (TextView) findViewById(R.id.today_current_wind_deg_weather_textview);
 
+        todayCurrentWeatherTextView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+
         updateForecast();
 
     }
@@ -227,8 +234,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getSharedPreferencesValue(String key, String defValue) {
-        SharedPreferences locationPref = PreferenceManager.getDefaultSharedPreferences(this);
-        return locationPref.getString(key, defValue);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        return pref.getString(key, defValue);
+    }
+
+    private void setSharedPreferencesValue(String key, String value) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref.edit().putString(key, value).commit();
     }
 
     private void openPreferredLocationInMap(String cityName) {
