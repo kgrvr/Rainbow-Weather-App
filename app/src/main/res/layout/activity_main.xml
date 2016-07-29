@@ -186,6 +186,7 @@
                                         android:layout_height="18dp"
                                         android:layout_gravity="center"
                                         android:gravity="center"
+                                        android:onClick="toastOnClickView"
                                         android:src="@drawable/humidity_icon" />
 
                                     <TextView
@@ -206,6 +207,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/today_current_humidity_weather_textview"
                                         android:gravity="center"
                                         android:text="%"
@@ -217,6 +219,7 @@
                                         android:layout_height="18dp"
                                         android:layout_gravity="center"
                                         android:layout_marginLeft="10dp"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/percentage"
                                         android:src="@drawable/wind_speed_icon" />
 
@@ -235,6 +238,7 @@
                                         android:id="@+id/mps"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/today_current_wind_speed_weather_textview"
                                         android:text="m/s"
                                         android:textSize="18sp" />
@@ -244,6 +248,7 @@
                                         android:layout_width="18dp"
                                         android:layout_height="18dp"
                                         android:layout_gravity="center"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/mps"
                                         android:layout_marginLeft="10dp"
                                         android:src="@drawable/compass_icon" />
@@ -264,6 +269,7 @@
                                         android:layout_width="18dp"
                                         android:layout_height="18dp"
                                         android:layout_gravity="center"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/today_current_wind_deg_weather_textview"
                                         android:layout_marginLeft="10dp"
                                         android:src="@drawable/pressure_icon" />
@@ -283,6 +289,7 @@
                                         android:id="@+id/hPa"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:onClick="toastOnClickView"
                                         android:layout_toRightOf="@id/today_current_pressure_weather_textview"
                                         android:text="hPa"
                                         android:textSize="18sp" />

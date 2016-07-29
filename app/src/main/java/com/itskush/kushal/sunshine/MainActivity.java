@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout todayLinearLayout;
     CollapsingToolbarLayout collapsingToolbar;
     Toolbar toolbar;
+    TextView percentage, mps, hPa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
         todayCurrentPressure = (TextView) findViewById(R.id.today_current_pressure_weather_textview);
         todayCurrentWindDeg = (TextView) findViewById(R.id.today_current_wind_deg_weather_textview);
         CorF = (TextView) super.findViewById(R.id.CorF);
+
+        percentage = (TextView) super.findViewById(R.id.percentage);
+        mps = (TextView) super.findViewById(R.id.mps);
+        hPa = (TextView) super.findViewById(R.id.hPa);
 
         todayCurrentWeatherTextView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -265,18 +270,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void toastOnClickView(View v) {
         switch (v.getId()) {
+            case R.id.humidity_icon:
+            case R.id.percentage:
             case R.id.today_current_humidity_weather_textview:
                 Toast.makeText(MainActivity.this, "Humidity: " + todayCurrentHumidity.getText() + "%", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.wind_speed_icon:
+            case R.id.mps:
             case R.id.today_current_wind_speed_weather_textview:
                 Toast.makeText(MainActivity.this, "Wind Speed: " + todayCurrentWindSpeed.getText() + " Meter(s)/Second", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.pressure_icon:
+            case R.id.hPa:
             case R.id.today_current_pressure_weather_textview:
                 Toast.makeText(MainActivity.this, "Pressure: " + todayCurrentPressure.getText() + " Hectopascal", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.compass_icon:
             case R.id.today_current_wind_deg_weather_textview:
                 Toast.makeText(MainActivity.this, "Wind Direction: " + todayCurrentWindDeg.getText(), Toast.LENGTH_SHORT).show();
                 break;
@@ -301,8 +313,8 @@ public class MainActivity extends AppCompatActivity {
             changeTypeFace(Typeface.DEFAULT);
         else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("monospace"))
             changeTypeFace(Typeface.MONOSPACE);
-        else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("sans"))
-            changeTypeFace(Typeface.SANS_SERIF);
+        else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("cheeronsta"))
+            changeTypeFace(Typeface.createFromAsset(getAssets(), "fonts/Cheeronsta Regular.otf"));
         else if(getSharedPreferencesValue("typeface", "Normal").toLowerCase().equals("serif"))
             changeTypeFace(Typeface.SERIF);
         else
@@ -380,6 +392,9 @@ public class MainActivity extends AppCompatActivity {
         todayCurrentPressure.setTypeface(typeface);
         todayCurrentWindDeg.setTypeface(typeface);
         CorF.setTypeface(typeface);
+        percentage.setTypeface(typeface);
+        mps.setTypeface(typeface);
+        hPa.setTypeface(typeface);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////

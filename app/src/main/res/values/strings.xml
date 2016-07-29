@@ -31,7 +31,7 @@
     <string-array name="pref_select_typeface">
         <item>Monospace</item>
         <item>Normal</item>
-        <item>Sans</item>
         <item>Serif</item>
+        <item>Cheeronsta</item>
     </string-array>
 </resources>
